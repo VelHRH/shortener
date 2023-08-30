@@ -9,13 +9,14 @@ import (
 )
 
 type Config struct {
-	Env        string `yaml:"env" env-default:"local"`
-	HTTPServer `yaml:"http_server"`
+	Env         string `yaml:"env" env-default:"local"`
+	StoragePath string `yaml:"storage_path" env-default:"local"`
+	HTTPServer  `yaml:"http_server"`
 }
 
 type HTTPServer struct {
 	Address string        `yaml:"address" env-default:"localhost:4444"`
-	Timeout time.Duration `yaml:"timeout" env-default:"4s"`
+	Timeout time.Duration `yaml:"timeout" env-required:"true"`
 }
 
 func MustLoad() *Config {
